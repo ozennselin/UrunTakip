@@ -3,6 +3,7 @@ using UrunTakip.Data;
 
 namespace UrunTakip.Controllers
 {
+    //https://bootsnipp.com/snippets/2P90=> template linki
     public class UrunlerController : Controller
     {
         private readonly NorthwindDB _db;//DI=> Dependency Injection
@@ -25,7 +26,7 @@ namespace UrunTakip.Controllers
             //var query = _db.Product.Where(p => p.ProductId == 9).FirstOrDefault();//select *from Products  where ProductID=9
 
 
-            return View();
+            return View(liste);
         }
 
         public IActionResult UrunEkle()
