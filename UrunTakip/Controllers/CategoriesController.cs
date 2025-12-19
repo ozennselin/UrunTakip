@@ -13,6 +13,7 @@ namespace UrunTakip.Controllers
         }
         public IActionResult Index()
         {
+            //CRUD=>Insert, Update, Delete,Read(List) amaç bunları Entity Framework ile yapacağız
             var liste = _db.Categories.ToList();
             return View(liste);
         }
