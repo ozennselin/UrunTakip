@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UrunTakip.Data;
+using UrunTakip.Data.Entities;
 
 namespace UrunTakip.Controllers
 {
@@ -53,6 +54,39 @@ namespace UrunTakip.Controllers
             return View();
         }
 
+        [HttpPost]//Açılan Index sayfası içinde form elementinin özelliklerini kullanmak için var
+                  //public IActionResult UrunEkle(string ProductName,int PupplierID,int CategoryID,int QuantityPerUnit,decimal UnitPrice,int UnitsInStock,short UnitsOnOrder,short ReorderLevel,bool Discontinued)//bunun yerine Product nesne kullanılacak aşağıda gibi
+        public IActionResult UrunEkle(Products product)
+        {
+            //doldurulan data için burda Db ye Insert işlemi yapılacak şekilde işlem yapılmalıdır
+            Products ekle = new Products();
+            ekle.ProductName = product.ProductName;
+            ekle.SupplierID = product.SupplierID;
+            ekle.CategoryID = product.CategoryID;
+            ekle.QuantityPerUnit = product.QuantityPerUnit;
+            ekle.UnitPrice = product.UnitPrice;
+            ekle.UnitsInStock = product.UnitsInStock;
+            ekle.UnitsOnOrder = product.UnitsOnOrder;
+            ekle.ReorderLevel = product.ReorderLevel;
+            ekle.Discontinued = product.Discontinued;
+            _db.Products.Add(ekle);//ekle olan nesneye ,product parametresinden gelen datalar atandıktan sonra DbSet e ekleme yapıldı   
+            int sonuc = _db.SaveChanges();//Değişiklikleri veritabanına  kaydet
+            if (sonuc > 0)
+            {
+                ViewBag.eklemeDurum = "Ekleme işlemi başarılı oldu.";
+                KategoriYukle();
+                //başarılı
+                return View();//Ekleme başarılı ise UrunList sayfasına yönlendir
+            }
+            else
+            {
+                ViewBag.eklemeDurum = "Ekleme işlemi başarısız oldu.";
+                KategoriYukle();
+                //başarısız
+                return View();
+            }
+            return View();
+        }
         private void KategoriYukle()
         {
             var getirKategori= _db.Categories.ToList();
