@@ -1,0 +1,32 @@
+﻿@using UrunTakip.Data.Entities
+
+@model List<Customers>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Müşteri Listesi</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>CustomerID</th>
+            <th>CompanyName</th>
+            <th>ContactName</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CustomerID</td>
+                <td>@item.CompanyName</td>
+                <td>@item.ContactName</td>
+                <td>@item.City</td>
+            </tr>
+        }
+    </tbody>
+</table>
