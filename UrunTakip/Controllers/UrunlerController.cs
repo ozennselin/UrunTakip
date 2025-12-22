@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using UrunTakip.Data;
 
 namespace UrunTakip.Controllers
@@ -31,7 +32,32 @@ namespace UrunTakip.Controllers
 
         public IActionResult UrunEkle()
         {
+
+            //Data alışverişini aşağıdaki 3 yapı ile de yapabiliriz
+            //1)ViewBag.kategori1=_db.Categories.ToList();//ViewBag dinamik bir yapı
+            //2) TempData["kategori2"]=_db.Categories.ToList();//TempData=> bir sayfadan diğerine veri taşımak için kullanılır
+            //3) ViewData["kategori3"]=_db.Categories.ToList();//ViewData=> ViewBag gibi dinamik bir yapı ama sözlük yapısında çalışır
+
+            //List<string> text=new List<string>();
+            //text.Add("Bilgisayar");
+            //text.Add("Telefon");
+            //text.Add("Tablet");
+            //text.Add("Beyaz Eşya");
+            //ViewBag.kategory12=text;
+            //var getirKategori=_db.Categories.ToList();
+            //////using Microsoft.AspNetCore.Mvc.Rendering; eklenmeli
+            ///////genelde SelctList yapıları value ve Text olmak üzere 2 parametre alır
+            //var kategoriler = new SelectList(getirKategori, "CategoryId", "CategoryName");
+            //ViewBag.kategoriList = kategoriler;
+            KategoriYukle();
             return View();
+        }
+
+        private void KategoriYukle()
+        {
+            var getirKategori= _db.Categories.ToList();
+            var kategoriler = new SelectList(getirKategori, "CategoryId", "CategoryName");
+            ViewBag.kategoriList = kategoriler;
         }
     }
 }
