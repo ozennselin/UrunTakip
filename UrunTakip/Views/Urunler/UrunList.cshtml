@@ -41,7 +41,7 @@
                             <th>Ürün Adı</th>
                             <th>Fiyat</th>
                             <th>Stok</th>
-                            <th>Güncelle</th>
+                           @*  <th>Güncelle</th> *@
                             <th>Güncelle</th>
                             <th>Sil</th>
                         </tr>
@@ -57,9 +57,10 @@
                                 <td>@item.UnitPrice</td>
                                 <td>@item.UnitsInStock</td>
                               
-                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>Gnc</button></p></td>
+                           @*      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>Gnc</button></p>
+                                    </td> *@
                                 <td>
-                                    @Html.ActionLink("Gnc","UrunGuncelle ",new{id=item.ProductID},new{@class="btn btn-sm btn-primary"})
+                                    @Html.ActionLink("Gnc","UrunGuncelle",new{id=item.ProductID},new{@class="btn btn-sm btn-primary"})
                                     @* @Html.ActionLink("Test Link","Index","Categories") *@
                                  
               

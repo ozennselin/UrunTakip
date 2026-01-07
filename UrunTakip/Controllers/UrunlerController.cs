@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Build.Tasks.Deployment.Bootstrapper;
 using UrunTakip.Data;
 using UrunTakip.Data.Entities;
 
@@ -12,7 +13,7 @@ namespace UrunTakip.Controllers
 
         public UrunlerController(NorthwindDB db)
         {
-            _db= db;//DI devamı
+            _db = db;//DI devamı
         }
 
         public IActionResult Index()
@@ -31,6 +32,7 @@ namespace UrunTakip.Controllers
             return View(liste);
         }
 
+        [HttpGet]
         public IActionResult UrunEkle()
         {
 
@@ -89,9 +91,50 @@ namespace UrunTakip.Controllers
         }
         private void KategoriYukle()
         {
-            var getirKategori= _db.Categories.ToList();
+            var getirKategori = _db.Categories.ToList();
             var kategoriler = new SelectList(getirKategori, "CategoryId", "CategoryName");
             ViewBag.kategoriList = kategoriler;
+        }
+
+        [HttpGet]
+        public IActionResult UrunGuncelle(int id)
+        {
+            KategoriYukle();
+            var secilenUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();
+            return View(secilenUrun);
+        }
+        [HttpPost]
+        public IActionResult UrunGuncelle(Products product)
+        {
+            Products guncellecekUrun = _db.Products.Where(k => k.ProductID == product.ProductID).FirstOrDefault();//Linq ,=> Lambda expresion
+
+            guncellecekUrun.ProductName = product.ProductName;
+            guncellecekUrun.SupplierID = product.SupplierID;
+            guncellecekUrun.CategoryID = product.CategoryID;
+            guncellecekUrun.QuantityPerUnit = product.QuantityPerUnit;
+            guncellecekUrun.UnitPrice = product.UnitPrice;
+            guncellecekUrun.UnitsInStock = product.UnitsInStock;
+            guncellecekUrun.UnitsOnOrder = product.UnitsOnOrder;
+            guncellecekUrun.ReorderLevel = product.ReorderLevel;
+            guncellecekUrun.Discontinued = product.Discontinued;
+          
+            int sonuc = _db.SaveChanges();//güncelleme için sadece bu yeterli
+            
+            if (sonuc > 0)
+            {
+                ViewBag.mesaj = "Güncellem işlemi başarılı oldu.";
+                KategoriYukle();
+                //return View(); bunun yerine listeye yönlendirelim
+ 
+                return RedirectToAction("UrunList");
+            }
+            else
+            {
+                ViewBag.mesaj = "Güncellem işlemi başarısız oldu.";
+                KategoriYukle();
+                //başarısız
+                return View();
+            }
         }
     }
 }
