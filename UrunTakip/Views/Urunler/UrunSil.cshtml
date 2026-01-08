@@ -1,0 +1,67 @@
+﻿@model UrunTakip.Data.Entities.Products
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Products Delete</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UrunSil" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="text" asp-for="ProductID" hidden="hidden" />
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" readonly value="@Model.ProductName" class="form-control disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierID" class="control-label"></label>
+                <input asp-for="SupplierID" readonly class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Kategori Name</label>
+                <input asp-for="CategoryID" readonly class="form-control" />
+         
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityPerUnit" class="control-label"></label>
+                <input readonly asp-for="QuantityPerUnit" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitPrice" class="control-label"></label>
+                <input readonly asp-for="UnitPrice" class="form-control"  />
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitsInStock" class="control-label"></label>
+                <input readonly asp-for="UnitsInStock" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitsOnOrder" class="control-label"></label>
+                <input readonly asp-for="UnitsOnOrder" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ReorderLevel" class="control-label"></label>
+                <input readonly asp-for="ReorderLevel" class="form-control" />
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input readonly class="form-check-input" asp-for="Discontinued" /> @Html.DisplayNameFor(model => model.Discontinued)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="SİL" class="btn btn-danger" />
+            </div>
+
+            @ViewBag.eklemeDurum
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="UrunList" class="btn btn-warning">Back to List</a>
+</div>
+
+
+
+

@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-6">
         @* <input type="button" value="EKLE" class="btn btn-success" /> *@
-        @Html.ActionLink("EKLE", "UrunEkle", "Urunler", null , new { @class = "btn btn-success " })
+        @Html.ActionLink("EKLE", "UrunEkle", "Urunler", null, new { @class = "btn btn-success " })
     </div>
 </div>
 
@@ -41,7 +41,7 @@
                             <th>Ürün Adı</th>
                             <th>Fiyat</th>
                             <th>Stok</th>
-                           @*  <th>Güncelle</th> *@
+                            @*  <th>Güncelle</th> *@
                             <th>Güncelle</th>
                             <th>Sil</th>
                         </tr>
@@ -56,16 +56,20 @@
                                 <td>@item.ProductName</td>
                                 <td>@item.UnitPrice</td>
                                 <td>@item.UnitsInStock</td>
-                              
-                           @*      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>Gnc</button></p>
+
+                                @*      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>Gnc</button></p>
                                     </td> *@
                                 <td>
-                                    @Html.ActionLink("Gnc","UrunGuncelle",new{id=item.ProductID},new{@class="btn btn-sm btn-primary"})
+                                    @Html.ActionLink("Gnc", "UrunGuncelle", new { id = item.ProductID }, new { @class = "btn btn-sm btn-primary" })
                                     @* @Html.ActionLink("Test Link","Index","Categories") *@
-                                 
-              
                                 </td>
-                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-sm btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span>Sil</button></p></td>
+                           @*      <td>
+                                    <p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-sm btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span>Sil</button></p>
+                                </td> *@
+                                <td>
+                                    @Html.ActionLink("Sil", "UrunSil", new { id = item.ProductID }, new { @class = "btn btn-sm btn-danger" })
+                                    @* @Html.ActionLink("Test Link","Index","Categories") *@
+                                </td>
                             </tr>
                         }
 

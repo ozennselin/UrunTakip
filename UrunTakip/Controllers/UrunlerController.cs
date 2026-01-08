@@ -87,7 +87,6 @@ namespace UrunTakip.Controllers
                 //başarısız
                 return View();
             }
-            return View();
         }
         private void KategoriYukle()
         {
@@ -117,15 +116,15 @@ namespace UrunTakip.Controllers
             guncellecekUrun.UnitsOnOrder = product.UnitsOnOrder;
             guncellecekUrun.ReorderLevel = product.ReorderLevel;
             guncellecekUrun.Discontinued = product.Discontinued;
-          
+
             int sonuc = _db.SaveChanges();//güncelleme için sadece bu yeterli
-            
+
             if (sonuc > 0)
             {
                 ViewBag.mesaj = "Güncellem işlemi başarılı oldu.";
                 KategoriYukle();
                 //return View(); bunun yerine listeye yönlendirelim
- 
+
                 return RedirectToAction("UrunList");
             }
             else
@@ -136,5 +135,27 @@ namespace UrunTakip.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public IActionResult UrunSil(int id)
+        {
+            var secilenUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();
+            return View(secilenUrun);
+        }
+
+        [HttpPost,ActionName("UrunSil")]//?? aynı isim, aynı parametre ile overload edilemez
+        public IActionResult UrunSilPost(int id)
+        {
+            var silinecekUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();
+            _db.Products.Remove(silinecekUrun);//EF ile db den data silme
+            _db.SaveChanges();//Silme işlemini db ye kaydet
+            return RedirectToAction("UrunList");
+        }
+
+
+
+
+
+
     }
 }
