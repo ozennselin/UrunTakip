@@ -99,7 +99,11 @@ namespace UrunTakip.Controllers
         public IActionResult UrunGuncelle(int id)
         {
             KategoriYukle();
+            
             var secilenUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();
+            int gelenKategoryId =(int) secilenUrun.CategoryID;
+            string kategoriAdi=_db.Categories.Where(k=>k.CategoryId==gelenKategoryId).FirstOrDefault().CategoryName;
+            ViewBag.secilenKategori = kategoriAdi;
             return View(secilenUrun);
         }
         [HttpPost]
