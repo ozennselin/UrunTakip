@@ -1,4 +1,5 @@
-﻿@model UrunTakip.Data.Entities.Products
+﻿@* @model UrunTakip.Data.Entities.Products *@
+@model UrunTakip.DTO.ProductDTOS.ProductUpdateDto
 
 @{
     ViewData["Title"] = "UrunGuncelle";
@@ -13,7 +14,7 @@
     <div class="col-md-4">
         <form asp-action="UrunGuncelle" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="text" asp-for="ProductID" hidden="hidden"  />
+            <input type="text" asp-for="ProductID" hidden="hidden" />
             <div class="form-group">
                 <label asp-for="ProductName" class="control-label"></label>
                 <input asp-for="ProductName" value="@Model.ProductName" class="form-control" />
@@ -21,8 +22,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="SupplierID" class="control-label"></label>
-                <input asp-for="SupplierID"  class="form-control" />
-                <span asp-validation-for="SupplierID" class="text-danger"></span>
+                @*  <input asp-for="SupplierID"  class="form-control" />
+                <span asp-validation-for="SupplierID" class="text-danger"></span> *@
+                <select asp-for="SupplierID" class="form-control">
+
+                    <option value="@Model.SupplierID" selected>@Model.SupplierName</option>
+                </select>
             </div>
             <div class="form-group">
                 <label class="control-label">Kategori Name</label>
@@ -32,7 +37,8 @@
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
-                    <option value="@Model.CategoryID" selected>@ViewBag.secilenKategori</option>
+                    @* <option value="@Model.CategoryID" selected>@ViewBag.secilenKategori</option> *@
+                    <option value="@Model.CategoryID" selected>@Model.CategoryName</option>
                 </select>
 
                 <span asp-validation-for="CategoryID" class="text-danger"></span>
@@ -77,7 +83,7 @@
 </div>
 
 <div>
-    <a asp-action="UrunList"  class="btn btn-warning">Back to List</a>
+    <a asp-action="UrunList" class="btn btn-warning">Back to List</a>
 </div>
 
 @section Scripts {

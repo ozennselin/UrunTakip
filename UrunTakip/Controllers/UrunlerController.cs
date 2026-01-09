@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Tasks.Deployment.Bootstrapper;
 using UrunTakip.Data;
 using UrunTakip.Data.Entities;
+using UrunTakip.Mapping;
 
 namespace UrunTakip.Controllers
 {
@@ -10,10 +11,13 @@ namespace UrunTakip.Controllers
     public class UrunlerController : Controller
     {
         private readonly NorthwindDB _db;//DI=> Dependency Injection
+        private readonly ProductMapping _mapping;
 
-        public UrunlerController(NorthwindDB db)
+        public UrunlerController(NorthwindDB db,ProductMapping mapping)
         {
             _db = db;//DI devamı
+            _mapping = mapping;
+
         }
 
         public IActionResult Index()
@@ -99,12 +103,24 @@ namespace UrunTakip.Controllers
         public IActionResult UrunGuncelle(int id)
         {
             KategoriYukle();
-            
             var secilenUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();
-            int gelenKategoryId =(int) secilenUrun.CategoryID;
-            string kategoriAdi=_db.Categories.Where(k=>k.CategoryId==gelenKategoryId).FirstOrDefault().CategoryName;
-            ViewBag.secilenKategori = kategoriAdi;
+
+            #region DropDownList için Category ve supplier viewbag ile yüklenecek kodlar
+
+            /* int gelenKategoryId = (int)secilenUrun.CategoryID;
+             string kategoriAdi = _db.Categories.Where(k => k.CategoryId == gelenKategoryId).FirstOrDefault().CategoryName;
+             ViewBag.secilenKategori = kategoriAdi;
+
+             int gelenSupplierId = (int)secilenUrun.SupplierID;
+             string tedarikciAdi = _db.Suppliers.Where(k => k.SupplierID == gelenSupplierId).FirstOrDefault().CompanyName;
+             ViewBag.secilenTedarikci = tedarikciAdi;    
             return View(secilenUrun);
+            */
+            #endregion
+            
+            var mapDto = _mapping.UpdateMapping(secilenUrun);
+
+            return View(mapDto);
         }
         [HttpPost]
         public IActionResult UrunGuncelle(Products product)
@@ -155,7 +171,6 @@ namespace UrunTakip.Controllers
             _db.SaveChanges();//Silme işlemini db ye kaydet
             return RedirectToAction("UrunList");
         }
-
 
 
 

@@ -4,7 +4,7 @@ public class ProductUpdateDto
 {
     public int? ProductID { get; set; }
     public string ProductName { get; set; }
-    public int? SupplierId { get; set; }
+    public int? SupplierID { get; set; }
     public string SupplierName { get; set; }
     public int? CategoryID { get; set; }
     public string CategoryName { get; set; }

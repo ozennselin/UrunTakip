@@ -1,18 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using UrunTakip.Data;
+using UrunTakip.Mapping;
 
 
 //yukarý alan kütüphane laýndýr
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews();//Controler C, View V, Model M=> MVC
+builder.Services.AddTransient<ProductMapping>();//Mapping class ýný DI container a ekliyoruz
+
 
 //Veritabaný baðlama iþlemi
 
 
 var baglantiAdresi = builder.Configuration.GetConnectionString("NorthwindDB");//Bu adres SQL Server da yer alan NorthwindDB veritanýnýn adresidir
 builder.Services.AddDbContext<NorthwindDB>(x => x.UseSqlServer(baglantiAdresi));//NorthwindDB adýnda class ýma adresi verilen veritabaný adresi içeren baglantiAdresi adresindeki veritabanýný kullan(c# tarafýnda db yi SQL serverdaki DB ye eþitliyor)
+
 
 var app = builder.Build();
 
