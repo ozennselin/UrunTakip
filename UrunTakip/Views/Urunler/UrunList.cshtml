@@ -1,6 +1,6 @@
-﻿@using UrunTakip.Data.Entities
+﻿@using UrunTakip.DTO.ProductDTOS
 
-@model List<Products>
+@model List<ProductListDto>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,6 +39,8 @@
                             <th><input type="checkbox" id="checkall" /></th>
                             <th>ID</th>
                             <th>Ürün Adı</th>
+                            <th>Kategori Adı</th>
+                            <th>Tedarikçi Adı</th>
                             <th>Fiyat</th>
                             <th>Stok</th>
                             @*  <th>Güncelle</th> *@
@@ -54,6 +56,8 @@
                                 <td><input type="checkbox" class="checkthis" /></td>
                                 <td>@item.ProductID</td>
                                 <td>@item.ProductName</td>
+                                <td>@item.CategoryName</td>
+                                <td>@item.SupplierName</td>
                                 <td>@item.UnitPrice</td>
                                 <td>@item.UnitsInStock</td>
 

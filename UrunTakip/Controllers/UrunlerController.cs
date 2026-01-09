@@ -31,9 +31,10 @@ namespace UrunTakip.Controllers
             var liste = _db.Products.ToList();//ToList()=> Linq
             //select *from Products=> ToList()
             //var query = _db.Product.Where(p => p.ProductId == 9).FirstOrDefault();//select *from Products  where ProductID=9
+            //return View(liste);
 
-
-            return View(liste);
+            var listDto = _mapping.ListMapping(liste);
+            return View(listDto);
         }
 
         [HttpGet]

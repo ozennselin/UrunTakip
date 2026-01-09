@@ -1,4 +1,5 @@
-﻿using UrunTakip.Data;
+﻿using Humanizer;
+using UrunTakip.Data;
 using UrunTakip.Data.Entities;
 using UrunTakip.DTO.ProductDTOS;
 
@@ -50,5 +51,32 @@ public class ProductMapping
         dto.SupplierName = _db.Suppliers.Find(product.SupplierID)?.CompanyName;
 
         return dto;
+    }
+
+    public List<ProductListDto> ListMapping(List<Products> products)
+    {
+        List<ProductListDto> list = new List<ProductListDto>();
+
+        foreach (Products product in products)
+        {
+            var dto = new ProductListDto()
+            {
+                ProductName = product.ProductName,
+                SupplierID = product.SupplierID,
+                CategoryID = product.CategoryID,
+                QuantityPerUnit = product.QuantityPerUnit,
+                UnitPrice = product.UnitPrice,
+                UnitsInStock = product.UnitsInStock,
+                UnitsOnOrder = product.UnitsOnOrder,
+                ReorderLevel = product.ReorderLevel,
+                Discontinued = product.Discontinued,
+                CategoryName = _db.Categories.Find(product.CategoryID)?.CategoryName,
+                SupplierName = _db.Suppliers.Find(product.SupplierID)?.CompanyName
+            };
+            list.Add(dto);
+        }
+
+
+        return list;
     }
 }
