@@ -1,0 +1,39 @@
+﻿@model UrunTakip.Data.Entities.Categories
+
+@{
+    ViewData["Title"] = "CategorySil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Category Delete</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CategorySil" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="CategoryId" />
+
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" readonly class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Sil" class="btn btn-danger" />
+            </div>
+
+            @ViewBag.silmeDurum
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-warning">Back to List</a>
+</div>
