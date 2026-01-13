@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UrunTakip.Data;
+using UrunTakip.Data.Entities;
 
 namespace UrunTakip.Controllers
 {
