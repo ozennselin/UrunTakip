@@ -93,11 +93,20 @@ namespace UrunTakip.Controllers
         [HttpPost,ActionName("CategorySil")]
         public IActionResult CategorySilPost(int id)
         {
+
             var silinecekKategori=_db.Categories.Where(k=>k.CategoryId==id).FirstOrDefault();
 
+            try
+            {
             _db.Categories.Remove(silinecekKategori);
-            _db.SaveChanges();
+                _db.SaveChanges();
 
+            }
+            catch (Exception ex)
+            {
+                ViewBag.message = "Error:" + ex.Message;
+                return View(silinecekKategori);
+            }
             return RedirectToAction("Index");
         }
 
