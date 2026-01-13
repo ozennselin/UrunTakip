@@ -1,0 +1,52 @@
+﻿@model UrunTakip.DTO.CustomerDTOS.CustomerUpdateDto
+
+@{
+    ViewData["Title"] = "Müşteri Güncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Müşteri Güncelle</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CustomerGuncelle" method="post">
+            <input type="hidden" asp-for="CustomerID" />
+
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContactName" class="control-label"></label>
+                <input asp-for="ContactName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContactTitle" class="control-label"></label>
+                <input asp-for="ContactTitle" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-warning" />
+            </div>
+
+            @ViewBag.guncellemeDurum
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Dön</a>
+</div>
