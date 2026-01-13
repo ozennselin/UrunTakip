@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();//Controler C, View V, Model M=> MVC
+builder.Services.AddTransient<CategoryMapping>();
 builder.Services.AddTransient<ProductMapping>();//Mapping class ýný DI container a ekliyoruz
 
 
