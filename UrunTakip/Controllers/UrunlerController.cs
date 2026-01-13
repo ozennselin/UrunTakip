@@ -104,8 +104,15 @@ namespace UrunTakip.Controllers
         public IActionResult UrunGuncelle(int id)
         {
             KategoriYukle();
-            var secilenUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();
+            var secilenUrun = _db.Products.Where(k => k.ProductID == id).FirstOrDefault();//Linq=> C# içinde SQL kodları yazma teknolojisidir.
+              /*
+               ORM=> Object Relation Manager=> Nesne İlişki Yönetimi=> DB ile Kod arasında Data alışverişini yönetir
+              1-Code First => Bu projede kullanıldı
+              2-Model First
+              3-DB First
+              4-Ado .Net=> Eski bir teknoloji, çok fazla kod ile işlem yapar
 
+            */
             #region DropDownList için Category ve supplier viewbag ile yüklenecek kodlar
 
             /* int gelenKategoryId = (int)secilenUrun.CategoryID;
