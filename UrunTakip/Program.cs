@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UrunTakip.Data;
+using UrunTakip.Mapping;
 
 
 //yukarý alan kütüphane laýndýr
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<CategoryMapping>();
 
 //Veritabaný baðlama iþlemi
 
