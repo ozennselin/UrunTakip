@@ -2,6 +2,7 @@
 using UrunTakip.Data;
 using UrunTakip.Data.Entities;
 
+
 namespace UrunTakip.Controllers
 {
     public class CategoriesController : Controller
