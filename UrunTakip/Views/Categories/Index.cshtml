@@ -17,6 +17,8 @@
             <th>ID</th>
             <th>Kategori Adı</th>
             <th>Açıklama</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +28,8 @@
                 <td>@item.CategoryId</td>
                 <td>@item.CategoryName</td>
                 <td>@(item.Description ?? "-")</td>
+                <td>  @Html.ActionLink("Gnc", "CategoryGuncelle", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-warning" })</td>
+                <td>  @Html.ActionLink("Sil", "CategorySil", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-danger" })</td>
             </tr>
         }
     </tbody>

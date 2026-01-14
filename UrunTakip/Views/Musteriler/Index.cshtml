@@ -16,6 +16,8 @@
             <th>CompanyName</th>
             <th>ContactName</th>
             <th>City</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +28,8 @@
                 <td>@item.CompanyName</td>
                 <td>@item.ContactName</td>
                 <td>@item.City</td>
+                <td>  @Html.ActionLink("Gnc", "CustomerGuncelle", new { id = item.CustomerID }, new { @class = "btn btn-sm btn-warning" })</td>
+                <td>  @Html.ActionLink("Sil", "CustomerSil", new { id = item.CustomerID }, new { @class = "btn btn-sm btn-danger" })</td>
             </tr>
         }
     </tbody>
